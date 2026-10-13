@@ -3,7 +3,7 @@ gsap.registerPlugin(ScrollTrigger);
 const FRAME_COUNT = 193;
 const FRAME_SPEED = 3.3;   // video finishes around 30% of the scroll
 const IMAGE_SCALE = 1.12;  // slight over-scale to crop the fisheye rim
-const framePath = i => `frames${i < 97 ? 1 : 2}/frame_${String(i + 1).padStart(4, "0")}.webp`;
+const framePath = i => `frame_${String(i + 1).padStart(4, "0")}.webp`;
 
 if ("scrollRestoration" in history) history.scrollRestoration = "manual";
 window.scrollTo(0, 0);
