@@ -242,3 +242,50 @@ ScrollTrigger.create({ ...trigger, onUpdate: self => {
   updateVeil(self.progress);
   header.classList.toggle("on-video", self.progress < 0.29);
 }});
+
+
+/* ---------- Réalisations : lecture auto dans le viewport + visionneuse ---------- */
+const reelVideos = [...document.querySelectorAll(".reel video")];
+if ("IntersectionObserver" in window) {
+  const io = new IntersectionObserver(entries => entries.forEach(en => {
+    const v = en.target;
+    if (en.isIntersecting) {
+      if (!v.getAttribute("src")) v.src = v.dataset.src;
+      v.play().catch(() => {});
+    } else v.pause();
+  }), { threshold: 0.35 });
+  reelVideos.forEach(v => io.observe(v));
+}
+const lb = document.getElementById("lightbox");
+const lbVideo = document.getElementById("lb-video");
+const lbTitle = document.getElementById("lb-title");
+const lbImg = document.getElementById("lb-img");
+function openLb(src, title) {
+  lenis.stop();
+  lbTitle.textContent = title;
+  lbImg.hidden = true; lbVideo.hidden = false;
+  lbVideo.src = src;
+  lb.hidden = false;
+  lbVideo.play().catch(() => {});
+}
+function openImg(src) {
+  lenis.stop();
+  lbTitle.textContent = "";
+  lbVideo.hidden = true; lbImg.hidden = false;
+  lbImg.src = src;
+  lb.hidden = false;
+}
+function closeLb() {
+  lbVideo.pause();
+  lbVideo.removeAttribute("src");
+  lbVideo.load();
+  lbImg.removeAttribute("src");
+  lb.hidden = true;
+  lenis.start();
+}
+document.querySelectorAll(".reel").forEach(b => b.addEventListener("click", () => openLb(b.dataset.src, b.dataset.title)));
+lb.querySelector(".lb-close").addEventListener("click", closeLb);
+lb.addEventListener("click", e => { if (e.target === lb) closeLb(); });
+addEventListener("keydown", e => { if (e.key === "Escape" && !lb.hidden) closeLb(); });
+
+document.querySelectorAll(".shot").forEach(b => b.addEventListener("click", () => openImg(b.dataset.img)));
