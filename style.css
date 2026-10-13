@@ -138,3 +138,9 @@ a{color:inherit}
   .card-text p{font-size:.78rem;line-height:1.5}
   .card-price{margin-top:.4rem;font-size:.95rem}
 }
+
+/* Prix des packs */
+.card-tag{display:block;margin-top:.4rem;font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-soft)}
+@media (min-width:768px){.card-price{font-size:1.7rem;margin-top:.8rem}}
+@media (max-width:767px){.card-price{font-size:1.25rem}.card-tag{font-size:.5rem;letter-spacing:.2em}}
+@media (max-width:767px){.section-collection{padding-top:10vh}}
