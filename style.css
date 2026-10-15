@@ -185,3 +185,6 @@ a{color:inherit}
   .shots{column-count:2;column-gap:.6rem;margin-top:2rem}
   .shot{margin-bottom:.6rem}
 }
+
+.reels-solo{grid-template-columns:1fr;max-width:960px;margin-left:auto;margin-right:auto}
+.new-section+.mode-section{padding-top:4vh}
